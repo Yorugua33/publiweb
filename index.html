@@ -3,111 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global System - Carrusel 3D Ultra Premium</title>
-    <!-- Google Fonts & Font Awesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Global System - Anuncio</title>
+    <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent-pink: #ff0844;
-            --accent-orange: #ffb199;
-            --bg-dark: #050811;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(79, 172, 254, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(255, 8, 68, 0.1) 0px, transparent 50%);
+            background-color: #050811;
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        /* --------------------------------------------------
-           CONTENEDOR PERSPECTIVA 3D
-        -------------------------------------------------- */
-        .stage-3d {
-            perspective: 1200px;
-            width: 100%;
-            max-width: 480px;
-        }
-
-        .carousel-card {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            position: relative;
-            transform-style: preserve-3d;
-            border-radius: 32px;
-            box-shadow: var(--glass-shadow);
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Marcador de marco vidriado exterior */
-        .glass-frame {
-            position: absolute;
-            inset: 0;
-            border-radius: 32px;
-            border: 1px solid var(--glass-border);
-            pointer-events: none;
-            z-index: 10;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
-        }
-
-        .carousel-viewport {
-            width: 100%;
-            height: 100%;
-            border-radius: 32px;
             overflow: hidden;
-            position: relative;
         }
 
+        /* Contenedor tipo Anuncio / Mobile Frame */
+        .ad-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 90vh;
+            max-height: 750px;
+            background: #0a0f1d;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 242, 254, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Wrapper del Carrusel */
         .carousel-track {
             display: flex;
             width: 300%;
             height: 100%;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --------------------------------------------------
-           DIAPOSITIVAS (SLIDES)
-        -------------------------------------------------- */
+        /* Diapositivas */
         .slide {
+            position: relative;
             width: 33.333%;
             height: 100%;
-            position: relative;
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 35px 30px;
-            background-size: cover;
-            background-position: center;
-            transform-style: preserve-3d;
+            padding: 30px 24px;
         }
 
+        /* IMÁGENES DE FONDO DE ALTA DISPONIBILIDAD */
+        .slide-1 {
+            background-image: url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        }
+
+        .slide-2 {
+            background-image: url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        }
+
+        .slide-3 {
+            background-image: url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        }
+
+        /* Degradado oscuro sobre la imagen para legibilidad del texto */
         .slide-overlay {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(5, 8, 17, 0.45) 0%, rgba(5, 8, 17, 0.88) 100%);
             z-index: 1;
         }
 
@@ -120,403 +94,225 @@
             justify-content: space-between;
         }
 
-        /* SLIDE 1: PORTADA */
-        .slide-1 {
-            background-image: url('https://images.unsplash.com/photo-1556742049-0a67f2d4396d?auto=format&fit=crop&w=900&q=80');
-        }
-        .slide-1 .slide-overlay {
-            background: linear-gradient(180deg, rgba(5, 8, 17, 0.5) 0%, rgba(5, 8, 17, 0.95) 100%);
-        }
-
-        /* SLIDE 2: PROPUESTA DE VALOR */
-        .slide-2 {
-            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80');
-        }
-        .slide-2 .slide-overlay {
-            background: linear-gradient(135deg, rgba(4, 66, 137, 0.85) 0%, rgba(5, 8, 17, 0.95) 100%);
-        }
-
-        /* SLIDE 3: CTA & CONTACTO */
-        .slide-3 {
-            background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80');
-        }
-        .slide-3 .slide-overlay {
-            background: linear-gradient(180deg, rgba(5, 8, 17, 0.9) 0%, rgba(10, 15, 30, 0.98) 100%);
-        }
-
-        /* --------------------------------------------------
-           ELEMENTOS TIPOGRÁFICOS Y TARJETAS 3D FLOTANTES
-        -------------------------------------------------- */
+        /* Encabezado */
         .brand-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
             padding: 8px 16px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-transform: uppercase;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
             width: fit-content;
-            transform: translateZ(30px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .title-3d {
-            font-size: 1.65rem;
-            font-weight: 800;
-            line-height: 1.25;
-            color: #ffffff;
-            transform: translateZ(40px);
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .brand-badge i {
+            color: #00f2fe;
         }
 
-        .title-highlight {
-            background: linear-gradient(90deg, #ff0844 0%, #ffb199 100%);
+        /* Títulos y Contenido */
+        .main-text {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .main-text h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle-3d {
+        .main-text p {
             font-size: 0.95rem;
+            color: #d1d5db;
             line-height: 1.5;
-            color: #e2e8f0;
-            margin-top: 12px;
-            transform: translateZ(30px);
-            font-weight: 400;
         }
 
-        /* Glassmorphism Cards */
-        .glass-card-inner {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 18px;
-            margin-top: 15px;
-            transform: translateZ(35px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        /* Grid de Rubros (Slide 3) */
-        .rubros-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 12px 0;
-            transform: translateZ(35px);
-        }
-
-        .rubro-chip {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .rubro-chip i {
-            color: var(--primary);
-        }
-
-        /* Contact Items */
-        .contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-item i {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: rgba(0, 242, 254, 0.15);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        /* Botón Neomórfico/Glow Ultra CTA */
-        .btn-cta-3d {
-            display: flex;
+        /* Botón de Acción */
+        .cta-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
             color: #ffffff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 16px;
-            transform: translateZ(45px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-cta-3d:hover {
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
-            transform: translateZ(50px) scale(1.02);
-        }
-
-        /* Pies de página */
-        .slide-footer-3d {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #94a3b8;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
             font-weight: 600;
-            transform: translateZ(25px);
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 114, 255, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .swipe-indicator {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--primary);
-            animation: pulseSwipe 2s infinite;
+        .cta-btn:active {
+            transform: scale(0.98);
         }
 
-        @keyframes pulseSwipe {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(5px); }
-        }
-
-        /* --------------------------------------------------
-           CONTROLES Y NAVEGACIÓN
-        -------------------------------------------------- */
+        /* Botones de Navegación */
         .nav-btn {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%) translateZ(60px);
+            transform: translateY(-50%);
             width: 44px;
             height: 44px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            cursor: pointer;
-            z-index: 20;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-50%) translateZ(70px) scale(1.1);
+            background: rgba(255, 255, 255, 0.4);
         }
 
-        .prev-btn { left: 15px; }
-        .next-btn { right: 15px; }
+        .prev-btn { left: 12px; }
+        .next-btn { right: 12px; }
 
-        .pagination-dots {
+        /* Puntos de Indicador */
+        .indicators {
             position: absolute;
-            bottom: 18px;
+            bottom: 15px;
             left: 50%;
-            transform: translateX(-50%) translateZ(60px);
+            transform: translateX(-50%);
             display: flex;
             gap: 8px;
-            z-index: 20;
+            z-index: 10;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s;
         }
 
         .dot.active {
-            width: 24px;
-            border-radius: 12px;
-            background: var(--primary);
-            box-shadow: 0 0 12px var(--primary);
+            width: 28px;
+            border-radius: 10px;
+            background: #00f2fe;
         }
     </style>
 </head>
 <body>
 
-    <div class="stage-3d">
-        <div class="carousel-card" id="card3D">
-            <div class="glass-frame"></div>
+    <div class="ad-container">
+        <!-- Botones de Navegación -->
+        <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
 
-            <div class="carousel-viewport">
-                
-                <!-- Botones de Control -->
-                <button class="nav-btn prev-btn" id="prevBtn" aria-label="Anterior">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button class="nav-btn next-btn" id="nextBtn" aria-label="Siguiente">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
+        <!-- Indicadores -->
+        <div class="indicators">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
 
-                <!-- Puntos Indicadores -->
-                <div class="pagination-dots">
-                    <span class="dot active" onclick="goToSlide(0)"></span>
-                    <span class="dot" onclick="goToSlide(1)"></span>
-                    <span class="dot" onclick="goToSlide(2)"></span>
-                </div>
-
-                <!-- Pista del Carrusel -->
-                <div class="carousel-track" id="track">
-                    
-                    <!-- SLIDE 1: PORTADA -->
-                    <div class="slide slide-1">
-                        <div class="slide-overlay"></div>
-                        <div class="slide-content">
-                            <div>
-                                <div class="brand-badge">
-                                    <i class="fa-solid fa-cube"></i> GLOBAL SYSTEM
-                                </div>
-                                <div style="margin-top: 25px;">
-                                    <h1 class="title-3d">
-                                        ¿Sientes que el control de tu negocio <span class="title-highlight">se te va de las manos?</span> 📊
-                                    </h1>
-                                </div>
-                            </div>
-
-                            <div class="slide-footer-3d">
-                                <span>Organización Empresarial</span>
-                                <div class="swipe-indicator">
-                                    <span>Desliza para ver la solución</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Pista del Carrusel -->
+        <div class="carousel-track" id="track">
+            
+            <!-- Slide 1 -->
+            <div class="slide slide-1">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="brand-badge">
+                        <i class="fas fa-globe"></i> GLOBAL SYSTEM
                     </div>
-
-                    <!-- SLIDE 2: EL VALOR -->
-                    <div class="slide slide-2">
-                        <div class="slide-overlay"></div>
-                        <div class="slide-content">
-                            <div>
-                                <div class="brand-badge">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> SOLUCIÓN DIGITAL
-                                </div>
-                                
-                                <div class="glass-card-inner" style="margin-top: 20px;">
-                                    <h2 class="title-3d" style="font-size: 1.35rem;">
-                                        Diseñamos la herramienta exacta que tu rubro necesita.
-                                    </h2>
-                                    <p class="subtitle-3d">
-                                        Eliges el diseño, nosotros lo hacemos realidad. Sistemas de Gestión Comercial y Sitios Web para operar con máxima eficiencia.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="slide-footer-3d">
-                                <span>Sistemas & Sitios Web</span>
-                                <div class="swipe-indicator">
-                                    <span>Conoce los rubros</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="main-text">
+                        <h2>¿Sientes que el control de tu negocio <span class="highlight">se te va de las manos?</span></h2>
+                        <p>Moderniza la atención en tu mostrador con un software simple, potente y rápido.</p>
                     </div>
-
-                    <!-- SLIDE 3: LLAMADO A LA ACCIÓN (CTA) -->
-                    <div class="slide slide-3">
-                        <div class="slide-overlay"></div>
-                        <div class="slide-content">
-                            <div>
-                                <div class="brand-badge">
-                                    <i class="fa-solid fa-rocket"></i> COMIENZA HOY
-                                </div>
-                                
-                                <h2 class="title-3d" style="font-size: 1.4rem; margin-top: 15px;">
-                                    ¡Simplifica tu gestión hoy!
-                                </h2>
-
-                                <!-- Rubros -->
-                                <div class="rubros-grid">
-                                    <div class="rubro-chip"><i class="fa-solid fa-spa"></i> Estética</div>
-                                    <div class="rubro-chip"><i class="fa-solid fa-wrench"></i> Ferreterías</div>
-                                    <div class="rubro-chip"><i class="fa-solid fa-hotel"></i> Hoteles</div>
-                                    <div class="rubro-chip"><i class="fa-solid fa-building"></i> Inmobiliarias</div>
-                                    <div class="rubro-chip"><i class="fa-solid fa-store"></i> Kioscos</div>
-                                </div>
-
-                                <!-- Información de Contacto Glass -->
-                                <div class="glass-card-inner" style="padding: 12px 16px; margin-top: 10px;">
-                                    <div class="contact-list">
-                                        <a href="https://wa.me/5492254440222" target="_blank" class="contact-item">
-                                            <i class="fa-brands fa-whatsapp"></i>
-                                            <span><strong>WhatsApp:</strong> 2254440222</span>
-                                        </a>
-                                        <a href="mailto:marcelomur49@gmail.com" class="contact-item">
-                                            <i class="fa-regular fa-envelope"></i>
-                                            <span><strong>Mail:</strong> marcelomur49@gmail.com</span>
-                                        </a>
-                                    </div>
-                                    <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700; text-align: right;">
-                                        Global System — Marcelo Muraña
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Botón WhatsApp -->
-                            <a href="https://wa.me/5492254440222" class="btn-cta-3d" target="_blank">
-                                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
-                                Iniciar Consulta Directa
-                            </a>
-                        </div>
-                    </div>
-
+                    <button class="cta-btn" onclick="nextSlide()">
+                        Ver solución <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
+
+            <!-- Slide 2 -->
+            <div class="slide slide-2">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="brand-badge">
+                        <i class="fas fa-chart-line"></i> GLOBAL SYSTEM
+                    </div>
+                    <div class="main-text">
+                        <h2>Toma el mando con un <span class="highlight">sistema de gestión integral</span></h2>
+                        <p>Controla stock, ventas y facturación en tiempo real desde cualquier dispositivo.</p>
+                    </div>
+                    <button class="cta-btn" onclick="nextSlide()">
+                        Descubrir más <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide slide-3">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="brand-badge">
+                        <i class="fas fa-rocket"></i> GLOBAL SYSTEM
+                    </div>
+                    <div class="main-text">
+                        <h2>Haz crecer tu empresa <span class="highlight">sin complicaciones</span></h2>
+                        <p>Empieza a optimizar tus procesos hoy mismo. Asesoría e instalación inmediata.</p>
+                    </div>
+                    <!-- ENLACE A WHATSAPP CORREGIDO -->
+                    <a href="https://wa.me/5492254440222?text=Hola,%20me%20interesa%20solicitar%20una%20demo" target="_blank" class="cta-btn">
+                        Solicitar Demo <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- --------------------------------------------------
-       LÓGICA JAVASCRIPT: CARRUSEL Y EFECTO PERSPECTIVA 3D
-    -------------------------------------------------- -->
     <script>
-        const card3D = document.getElementById('card3D');
         const track = document.getElementById('track');
+        const dots = document.querySelectorAll('.dot');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const dots = document.querySelectorAll('.dot');
-        
+
         let currentIndex = 0;
         const totalSlides = 3;
 
-        // Actualizar Carrusel
         function updateCarousel() {
-            track.style.transform = `translateX(-${currentIndex * (100 / totalSlides)}%)`;
+            track.style.transform = `translateX(-${currentIndex * 33.333}%)`;
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
         }
 
         function goToSlide(index) {
@@ -524,60 +320,9 @@
             updateCarousel();
         }
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateCarousel();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        });
-
-        // --------------------------------------------------
-        // EFECTO TILT PERSPECTIVA 3D AL MOVER EL MOUSE
-        // --------------------------------------------------
-        const stage = document.querySelector('.stage-3d');
-
-        stage.addEventListener('mousemove', (e) => {
-            const rect = stage.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -12; // Inclinación en X
-            const rotateY = ((x - centerX) / centerX) * 12; // Inclinación en Y
-
-            card3D.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        stage.addEventListener('mouseleave', () => {
-            card3D.style.transform = `rotateX(0deg) rotateY(0deg)`;
-        });
-
-        // Soporte Swipe para Pantallas Táctiles
-        let startX = 0;
-        stage.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        stage.addEventListener('touchend', (e) => {
-            let endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                // Swipe Izquierda
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateCarousel();
-            } else if (endX - startX > 50) {
-                // Swipe Derecha
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-        });
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
     </script>
-
 </body>
 </html>
-
 
